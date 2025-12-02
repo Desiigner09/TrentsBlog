@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trent's Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      /* Color Palette */
+      --bg-body: #e8e8e8;       /* Lightest slate background */
+      --bg-card: #ffffff;       /* White content background */
+      --bg-sidebar: #1e293b;    /* Dark Slate for Sidebar */
+      --text-main: #334155;     /* Dark Grey text */
+      --text-muted: #64748b;    /* Muted text */
+      --text-sidebar: #e2e8f0;  /* Light text for sidebar */
+      --primary: #2563eb;       /* Bright Blue */
+      
+      --border: #e2e8f0;
+      --radius: 12px;
+      --max-width: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+
+    /* --- Header --- */
+    /* match myblogv2 header look (glass + fixed at top) */
+    .site-header {
+      background: rgba(226, 232, 240, 0.6);; /* glass */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(226,232,240,0.6);
+      position: fixed; /* fixed to top like myblogv2 */
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: all 0.25s ease;
+    }
+
+    .site-header .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ensure page content isn't hidden under the fixed header */
+    main { margin-top: 90px; }
+
+    .site-title a { color: #0f172a; font-weight: 700; font-size: 1.1rem; }
+    
+    .site-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav a { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
+    .site-nav a.active { color: var(--primary); font-weight: 600; }
+
+    /* --- Main Layout Grid --- */
+    main {
+      max-width: var(--max-width);
+      /* leave space for the fixed header */
+      margin: 90px auto 2rem;
+      padding: 0 1.5rem;
+    }
+
+    .resume-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr; /* Fixed sidebar width, fluid content */
+      gap: 2rem;
+      align-items: start; /* Essential for sticky to work */
+    }
+
+    /* --- Sidebar (The "Fixed" Panel) --- */
+    .resume-panel {
+      background: var(--bg-sidebar);
+      color: var(--text-sidebar);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      
+      /* Sticky Magic */
+      position: sticky;
+      top: 90px; /* Sticks 90px from top of window (accounting for header) */
+      height: calc(100vh - 110px); /* Full viewport height minus header/margin */
+      overflow-y: auto; /* Allows sidebar to scroll internally */
+      
+      /* Scrollbar styling for sidebar */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+
+    .resume-panel::-webkit-scrollbar { width: 6px; }
+    .resume-panel::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 10px; }
+
+    /* Sidebar Elements */
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid rgba(255,255,255,0.2);
+    }
+    
+    /* If a headshot image is present inside .profile-avatar it will fill the circle */
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover; /* preserves aspect and crops nicely */
+      display: block;
+    }
+
+
+    .profile-name { font-size: 1.5rem; font-weight: 700; text-align: center; color: #fff; margin-bottom: 0.25rem; }
+    .profile-title { font-size: 0.9rem; text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
+    .profile-location { font-size: 0.85rem; text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; }
+
+    .panel-actions { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; }
+    
+    .hire-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 99px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .hire-btn:hover { background: #1d4ed8; }
+
+    .linkedin-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: white;
+      transition: background 0.2s;
+    }
+    .linkedin-btn:hover { background: #0077b5; }
+    .linkedin-btn svg { fill: currentColor; width: 20px; height: 20px; }
+
+    /* Sidebar Section Headers */
+    .panel-section-title {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.5rem;
+      margin: 1.5rem 0 1rem;
+      font-weight: 700;
+    }
+
+    /* Chips (Strengths) */
+    .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      background: rgba(255,255,255,0.1);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+
+    /* Tech List Styling */
+    .tech-group { margin-bottom: 1.25rem; }
+    .tech-group-title { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+    
+    .tech-list {
+      display: grid;
+      grid-template-columns: 1fr; /* Single column for better readability in sidebar */
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      padding-left: 0; /* removed div padding */
+    }
+    
+    .tech-list div::before {
+        content: "•";
+        color: var(--primary);
+        margin-right: 6px;
+    }
+
+    /* --- Main Content (Right Side) --- */
+    .resume-main {
+      background: var(--bg-card);
+      padding: 3rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .resume-main h3 { margin-top: 0; font-size: 1.5rem; color: #0f172a; }
+    
+    /* Timeline List */
+    .resume-list { list-style: none; padding: 0; margin: 0; position: relative; }
+    /* Vertical line */
+    .resume-list::before {
+        content: ''; position: absolute; top: 0; bottom: 0; left: 0;
+        width: 2px; background: var(--border);
+    }
+    
+    .resume-list > li { padding-left: 2rem; margin-bottom: 2.5rem; position: relative; }
+    
+    /* Dots */
+    .resume-list > li::before {
+        content: ''; position: absolute; left: -5px; top: 6px;
+        width: 12px; height: 12px; border-radius: 50%;
+        background: #fff; border: 3px solid var(--primary);
+    }
+
+    .resume-item-title { font-weight: 700; font-size: 1.1rem; color: #0f172a; margin-bottom: 0.25rem; }
+    .resume-item-meta { 
+        display: inline-block; font-size: 0.85rem; color: var(--text-muted);
+        background: #f8fafc; padding: 0.2rem 0.6rem; border-radius: 4px; 
+        border: 1px solid var(--border); margin-bottom: 0.75rem;
+    }
+    
+    .resume-list ul { padding-left: 1.2rem; color: #4b5563; margin: 0; }
+    .resume-list ul li { margin-bottom: 0.5rem; }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 900px) {
+      .resume-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      
+      .resume-panel {
+        position: static; /* Unstick on mobile */
+        height: auto;
+        overflow: visible;
+      }
+      
+      .resume-main { padding: 1.5rem; }
+      
+      /* Hide the vertical line on mobile if desired, strictly optional */
+      .resume-list::before { left: 0; }
+    }
+
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="site-title"><a href="myblogv2.html">Trent's Blog</a></div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="myblogv2.html#posts">Posts</a></li>
+          <li><a href="myblogv2.html#my-apps">My Apps</a></li>
+          <li><a href="resume.html" class="active">Resume</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="resume-layout">
+      
+      <aside class="resume-panel" aria-label="Profile panel">
+        <div class="profile-avatar">
+          <!-- headshot.png should live next to this HTML file (same folder) -->
+          <img src="headshot.png" alt="Profile headshot" onerror="this.style.display='none'" />
+        </div>
+        <div class="profile-name">Trent Kloter</div>
+        <div class="profile-title">Operations/Self Storage Analyst</div>
+        <div class="profile-location">From Tampa, FL 🇺🇸<br/>Word Traveler 🌍</div>
+
+        <div class="panel-actions">
+          <!-- Contact now opens the user's email client -->
+          <a class="hire-btn" href="mailto:tkunderwriting@gmail.com" aria-label="Email Trent at tkunderwriting@gmail.com">Contact Me</a>
+          <a href="https://www.linkedin.com/in/trentkloter/" aria-label="LinkedIn" class="linkedin-btn">
+             <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+
+        <span class="panel-section-title">Strengths</span>
+        <div class="chips">
+          <span class="chip">Detail Oriented</span>
+          <span class="chip">Analytical</span>
+          <span class="chip">Innovative</span>
+          <span class="chip">Disciplined</span>
+          <span class="chip">Resourceful</span>
+          <span class="chip">Driven</span>
+        </div>
+
+        <span class="panel-section-title">Technologies</span>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Real Estate Software &amp; Data Analysis</div>
+          <div class="tech-list">
+            <div>Yardi Matrix</div>
+            <div>Reonomy</div>
+            <div>ArcGIS</div>
+            <div>ReGrid</div>
+            <div>LandGlide</div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Data &amp; Visualization</div>
+          <div class="tech-list">
+            <div>Google APIs (Maps, Sheets)</div>
+            <div>Tableau</div>
+          </div>
+        </div>
+
+
+        <div class="tech-group">
+          <div class="tech-group-title">Financial Analysis & Data Organization</div>
+          <div class="tech-list">
+            <div>Excel</div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Software &amp; Web Development</div>
+          <div class="tech-list">
+            <div>HTML / CSS / JS (Learning)</div>
+            <div>Github</div>
+            <div>Cursor (AI IDE)</div>
+            <div>WordPress</div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Business Operations &amp; Ops</div>
+          <div class="tech-list">
+            <div>Microsoft 365 Suite</div>
+            <div>Google Workspace</div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Project Management & CRM </div>
+          <div class="tech-list">
+            <div>Monday.com</div>
+            <div>Trello</div>
+            <div>Salesforce</div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <div class="tech-group-title">Design</div>
+          <div class="tech-list">
+            <div>Canva</div>
+            <div>Adobe Photoshop</div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="resume-main">
+        <section>
+          <h3 style="margin-bottom:1rem;">Summary</h3>
+          <p style="color:var(--text-muted); margin-top:0;">
+            Experienced financial and operations professional with a background in underwriting, asset evaluation, and business process optimization. Skilled in financial modeling, market research, and leveraging technology to drive efficiency and growth in real estate and business operations.
+          </p>
+        </section>
+
+        <hr style="border:none; border-top:1px solid var(--border); margin: 2.5rem 0;">
+
+        <section>
+          <h3 style="margin-bottom:2rem;">Professional Experience</h3>
+          <ul class="resume-list">
+            <li>
+              <div class="resume-item-title">Career Break</div>
+              <div class="resume-item-meta">Bangkok, Thailand | January 2025 – Current</div>
+              <ul>
+                <li>Conducted independent research on the Thailand self-storage market and viability of expansion in Bangkok.</li>
+                <li>Made several connections in the self-storage industry within Bangkok and Phuket including iStore (largest operator).</li>
+                <li>Attended Self Storage Conference in Tokyo in May 2025.</li>
+                <li>Invested in MyStorage operator in Vietnam.</li>
+                <li>Built and launched two web applications focusing on real estate and mapping.</li>
+              </ul>
+            </li>
+
+            <li>
+              <div class="resume-item-title">Oakside Companies – Operations Director (Self Storage)</div>
+              <div class="resume-item-meta">Tampa, FL | July 2023 – January 2025</div>
+              <ul>
+                <li>Deployed Salesforce, Microsoft Suite, Monday.com, and other platforms into company operations.</li>
+                <li>Conducted internal training on ChatGPT and advised the leadership team on other AI software.</li>
+                <li>Collaborated with the Leadership Team on company goals, budgeting and outlook.</li>
+                <li>Oversaw the offering memorandum creation process and deadlines for submission.</li>
+                <li>Managed and trained the remote marketing assistant.</li>
+              </ul>
+            </li>
+
+            <li>
+              <div class="resume-item-title">Berkshire Hathaway – Senior Analyst/Associate (Self Storage)</div>
+              <div class="resume-item-meta">Greenville, SC | March 2021 – July 2023 · Remote Position</div>
+              <ul>
+                <li>Sourced and qualified potential clients through various prospecting methods.</li>
+                <li>Updated and maintained CRM database with property data, notes, and client details.</li>
+                <li>Analyzed owner P&Ls, Rent Rolls, Management Reports and other documents.</li>
+                <li>Identified discrepancies in financial reports and spoke with property owners to address questions.</li>
+                <li>Utilized GIS mapping tools (ArcGIS, LandGlide, ReGrid) and county maps to review property details.</li>
+              </ul>
+            </li>
+
+            <li>
+              <div class="resume-item-title">SkyView Advisors – Senior Financial Analyst (Self Storage)</div>
+              <div class="resume-item-meta">Tampa, FL | May 2016 – Feb 2021</div>
+              <ul>
+                <li>Evaluated over $1B in self-storage assets from single properties to institutional portfolios.</li>
+                <li>Redeveloped the underwriting model for client presentations and improved workflow.</li>
+                <li>Created the underwriting training guide for new analysts.</li>
+                <li>Analyzed rent rolls, operating statements, and market data.</li>
+                <li>Collaborated with brokers on asset pricing and market positioning.</li>
+                <li>Assisted in creating offering memorandums and pitch decks.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <hr style="border:none; border-top:1px solid var(--border); margin: 2.5rem 0;">
+
+        <section>
+          <h3 style="margin-bottom:1rem;">Skills</h3>
+          <ul style="padding-left: 1.2rem; color: var(--text-muted);">
+            <li style="margin-bottom:0.5rem">Financial modeling & underwriting (self-storage, CRE)</li>
+            <li style="margin-bottom:0.5rem">Market research & investment memo writing</li>
+            <li style="margin-bottom:0.5rem">Data analysis & GIS mapping tools (ArcGIS, LandGlide, ReGrid)</li>
+            <li style="margin-bottom:0.5rem">Process optimization & operational tooling (Salesforce, Monday.com, Microsoft Suite)</li>
+            <li style="margin-bottom:0.5rem">Web tooling & lightweight app development (HTML/CSS/JS, backend frameworks)</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="current-year"></span> Trent Kloter
+  </footer>
+
+  <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
