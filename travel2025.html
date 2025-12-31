@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What I learned from visiting 11 countries in 2025 — Trent's Blog</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --primary:#2563eb;
+        --bg:#e8e8e9;
+        --card:#ffffff;
+        --muted:#64748b;
+        --text:#334155;
+        --heading:#0f172a;
+      }
+
+      html{ scroll-behavior: smooth }
+
+      body{
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .glass{
+        background: rgba(255,255,255,0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(226,232,240,0.6);
+      }
+
+      main{
+        max-width: 960px;
+        margin: 6rem auto 3rem;
+        padding: 0 1.5rem;
+      }
+
+      .article-card{
+        background: var(--card);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(226,232,240,0.7);
+        box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+      }
+
+      h1, h2, h3{
+        color: var(--heading);
+      }
+
+      .meta{
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .content p,
+      .content li{
+        color: var(--text);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .content ul{
+        margin-left: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Constrain article images so they don't become too tall */
+      .content img {
+        width: 100%;
+        max-height: 600px; /* page-wide default */
+        object-fit: cover; /* crop taller images cleanly */
+        display: block;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+      }
+
+      /* Photo-row: only used for the 2-image row to keep them centered and tighter */
+      .photo-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+      }
+
+      /* images inside the photo-row - improved quality */
+      .photo-row img {
+        width: calc(50% - 0.5rem);
+        max-width: 460px;
+        max-height: 340px;
+        object-fit: contain; /* Changed from cover to contain for better quality */
+        object-position: center;
+        display: block;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: #f8fafc;
+      }
+
+      .photo-row img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      /* 3-image row for compact display */
+      .photo-row-3 {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+      }
+
+      .photo-row-3 img {
+        width: calc(33.333% - 0.5rem);
+        max-width: 300px;
+        max-height: 220px;
+        object-fit: contain; /* Changed from cover to contain for better quality */
+        object-position: center;
+        display: block;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: #f8fafc;
+      }
+
+      .photo-row-3 img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      /* Modal/lightbox styles */
+      .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        animation: fadeIn 0.3s;
+      }
+
+      .image-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        animation: zoomIn 0.3s;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
+      .close-modal:hover {
+        opacity: 0.7;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      footer{
+        text-align: center;
+        padding: 2rem;
+        color: var(--muted);
+      }
+
+      .back-link{
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .back-link:hover{
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+      <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="index.html" class="text-xl font-bold hover:text-blue-600 transition-colors flex items-center gap-2">Trent's Blog</a>
+
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html#posts" class="text-sm font-medium hover:text-blue-600 transition-colors">Posts</a>
+          <a href="index.html#my-apps" class="text-sm font-medium hover:text-blue-600 transition-colors">My Apps</a>
+          <a href="resume.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Resume</a>
+        </nav>
+
+        <button class="md:hidden p-2 hover:bg-slate-100 rounded-md" onclick="toggleMobileMenu()">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-4 shadow-lg">
+        <a href="index.html#posts" class="block text-sm font-medium" onclick="toggleMobileMenu()">Posts</a>
+        <a href="index.html#my-apps" class="block text-sm font-medium" onclick="toggleMobileMenu()">My Apps</a>
+        <a href="resume.html" class="block text-sm font-medium" onclick="toggleMobileMenu()">Resume</a>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main>
+      <article class="article-card">
+        <div class="meta">Dec 2025</div>
+        <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-2">My Year of Traveling in 2025</h1>
+        <p class="meta mb-6">🇯🇵 Japan, 🇵🇭 Philippines, 🇮🇹 Italy, 🇩🇪 Germany, 🇫🇷 France, 🇬🇧 UK, 🇦🇹 Austria, 🇨🇿 Czechia, 🇸🇪 Sweden, 🇩🇰 Denmark, 🇳🇱 Netherlands</p>
+
+        <div class="content">
+
+          <p>In January of this year, I decided to take a break from working full time and spend most of the year in Southeast Asia. My home base was in Bangkok, Thailand. (This would mark my 3rd visit to Thailand).</p>
+
+          <div class="photo-row-3">
+            <img src="images/Travel1.jpg" alt="Bangkok, Thailand" class="shadow-md" onclick="openModal('images/Travel1.jpg')">
+            <img src="images/Travel2.jpg" alt="Bangkok, Thailand" class="shadow-md" onclick="openModal('images/Travel2.jpg')">
+            <img src="images/Travel3.jpg" alt="Bangkok, Thailand" class="shadow-md" onclick="openModal('images/Travel3.jpg')">
+          </div>
+
+          <p>I decided to explore self storage in Bangkok, touring properties and meeting with industry professionals. Regardless of location/country - people need storage. This was very evident in Bangkok due to the density of the population and condo buildings with an average size of about 40sqm (430sqft). I was able to learn about the market, the growth of the industry there and future outlook - which is promising.</p>
+
+          <p>Secondly, I realized the growing popularity of saunas/ice baths businesses and running clubs. There seems to be a fitness wave and interest in these activities. This led me to finding a location to start such a sauna/ice bath business which expected to launch in Q1/Q2 2026.</p>
+
+          <p>In May, I attended the Self Storage Conference in Tokyo, Japan which was my first visit to the country. The main theme from the conference was the emerging storage industry in Asia and long runway for it. I was able to tour a few locations as well. Japan has nearly 14,000 facilities! The city was incredibly clean, quiet, and orderly. I tend to walk a lot in a new city and appreciated the wide sidewalks! I'll have to visit again soon…</p>
+
+          <div class="photo-row">
+            <img src="images/Travel4.jpg" alt="Tokyo, Japan" class="shadow-md" onclick="openModal('images/Travel4.jpg')">
+            <img src="images/Travel5.jpg" alt="Tokyo, Japan" class="shadow-md" onclick="openModal('images/Travel5.jpg')">
+          </div>
+
+          <p>In July, I visited a colleague in Manila, Philippines. He owns a self storage app that allows users to rent out empty spaces (garage, basements, parking etc) and list the space on the platform. Manila left an imprint on me due to the severe poverty and stark contrast from the business district (office buildings, high rises, clean) to where my hotel was located (the opposite). It was like two different worlds - regardless the need for storage is also evident there and its a growing industry.</p>
+
+          <div class="photo-row">
+            <img src="images/Travel6.jpg" alt="Manila, Philippines" class="shadow-md" onclick="openModal('images/Travel6.jpg')">
+            <img src="images/Travel7.jpg" alt="Manila, Philippines" class="shadow-md" onclick="openModal('images/Travel7.jpg')">
+          </div>
+
+          <p>In August/September, I decided to meet a few friends in Europe and spending a few weeks traveling around. This was my first visit to Europe so I was excited to see iconic cities, visit museums, and try the different foods. Europe was incredibly scenic and the architecture design was amazing. I often took buses to different cities but also a few trains as well. I did some solo traveling for about half the time I was over there. I find this is one of the best life experiences - relying on yourself, being uncomfortable, and just going for it!</p>
+
+          <div class="photo-row-3">
+            <img src="images/Travel8.jpg" alt="Europe" class="shadow-md" onclick="openModal('images/Travel8.jpg')">
+            <img src="images/Travel9.jpg" alt="Europe" class="shadow-md" onclick="openModal('images/Travel9.jpg')">
+            <img src="images/Travel10.jpg" alt="Europe" class="shadow-md" onclick="openModal('images/Travel10.jpg')">
+          </div>
+
+          <div class="photo-row">
+            <img src="images/Travel12.jpg" alt="Europe" class="shadow-md" onclick="openModal('images/Travel12.jpg')">
+          </div>
+
+          <p>To wrap up 2025 - I decided to head back home to Florida to spend time with my family and enjoy the holidays. This time has allowed me to reflect and pursue some other business initiatives. I think 2026 will be an incredible year!</p>
+
+          <div class="photo-row">
+            <img src="images/Travel13.jpg" alt="Travel 2025" class="shadow-md" onclick="openModal('images/Travel13.jpg')">
+            <img src="images/Travel14.jpg" alt="Travel 2025" class="shadow-md" onclick="openModal('images/Travel14.jpg')">
+          </div>
+
+        </div>
+      </article>
+    </main>
+
+    <!-- Image Modal/Lightbox -->
+    <div id="imageModal" class="image-modal" onclick="closeModal()">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="modalImage" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="max-w-3xl mx-auto px-6 py-8 flex justify-between items-center text-sm">
+        <div>© <span id="current-year"></span> Trent's Blog</div>
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      lucide.createIcons();
+
+      function toggleMobileMenu(){
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+      }
+
+      // Modal/Lightbox functionality
+      function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        modal.classList.add('active');
+        modalImg.src = imageSrc;
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+
+      function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+
+      // Close modal on ESC key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          closeModal();
+        }
+      });
+    </script>
+
+  </body>
+</html>
+

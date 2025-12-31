@@ -62,7 +62,7 @@
     
     /* Glassmorphism utility */
     .glass {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(226, 232, 240, 0.6);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(226, 232, 240, 0.6);
@@ -87,7 +87,7 @@
   <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
     <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
       <!-- Logo / Brand -->
-      <a href="myblogv2.html" class="text-xl font-bold text-slate-900 hover:text-primary transition-colors flex items-center gap-2">
+      <a href="index.html" class="text-xl font-bold text-slate-900 hover:text-primary transition-colors flex items-center gap-2">
         <span>Trent's Blog</span>
       </a>
 
@@ -125,12 +125,21 @@
       <h1 class="text-4xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
         Hello and Welcome <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400"></span>
       </h1>
-        <p class="text-md text-slate-500 leading-relaxed max-w-6xl mx-auto">
+        <p class="text-md text-slate-800 leading-relaxed max-w-6xl mx-auto">
         This is a personal archive of my interests in AI, software/tech, macroeconomics and data.
         
         <br>Currently, I'm building a hyperlocal real estate data platform.</br>
 
-        For consulting engagements feel free to <a href="mailto:tkunderwriting@gmail.com" aria-label="Email Trent at tkunderwriting@gmail.com" class="text-primary font-semibold">email me</a>.
+        Connect with me via 
+        <a href="mailto:tkunderwriting@gmail.com" aria-label="Email Trent at tkunderwriting@gmail.com" class="text-primary font-semibold hover:text-primaryHover inline-flex items-center gap-1.5 transition-colors">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          email
+        </a> 
+        or 
+        <a href="https://www.linkedin.com/in/trentkloter/" target="_blank" rel="noopener" aria-label="LinkedIn Profile" class="text-primary font-semibold hover:text-primaryHover inline-flex items-center gap-1.5 transition-colors">
+          <i data-lucide="linkedin" class="w-4 h-4"></i>
+          LinkedIn
+        </a>.
       </p>
     </div>
 
@@ -145,17 +154,57 @@
       </div>
 
       <div class="space-y-6">
+
+         <!-- Post 1 -->
+        <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
+            <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
+              <a href="travel2025.html" class="relative inline-block">
+                <span class="absolute inset-0"></span>
+                My Year of Traveling in 2025
+              </a>
+            </h3>
+            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
+            Reflections on travel, business insights, and life experiences from a year spent exploring Southeast Asia and Europe.
+          </p>
+          <div class="flex items-center text-sm text-primary font-medium">
+            <a href="travel2025.html" class="font-medium text-primary hover:underline">Read more</a>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+          </div>
+        </article>
         
-        <!-- Post 1 -->
+        <!-- Post 2 -->
+        <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
+            <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
+              <a href="mystoragestory.html" class="relative inline-block">
+                <span class="absolute inset-0"></span>
+                Why I Invested In a Self Storage Facility In Vietnam
+              </a>
+            </h3>
+            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
+            Self storage is a maturing industry in the US but opportunities exist abroad.
+          </p>
+          <div class="flex items-center text-sm text-primary font-medium">
+            <a href="mystoragestory.html" class="font-medium text-primary hover:underline">Read more</a>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+          </div>
+        </article>
+        
+        <!-- Post 3 -->
         <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
           <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
             <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
               <a href="whatilearnedarticle.html" class="relative inline-block">
                 <span class="absolute inset-0"></span>
-                What I learned building my first web app
+                What I Learned Building My First Web App
               </a>
             </h3>
-            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Sep 5, 2025</time>
+            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
           </div>
           <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
             Sharing insights and challenges of creating a web app (no prior experience).
@@ -163,10 +212,10 @@
           <div class="flex items-center text-sm text-primary font-medium">
             <a href="whatilearnedarticle.html" class="font-medium text-primary hover:underline">Read more</a>
             <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
-            <span class="ml-auto text-slate-400 font-normal text-xs">5 min read</span>
           </div>
         </article>
 
+         
     
 
       </div>
@@ -222,11 +271,7 @@
       </div>
       <div class="flex gap-6">
         <a href="/rss.xml" class="hover:text-primary transition-colors flex items-center gap-2">
-          <i data-lucide="rss" class="w-4 h-4"></i>
-          RSS Feed
         </a>
-        <a href="#" class="hover:text-primary transition-colors">Twitter</a>
-        <a href="#" class="hover:text-primary transition-colors">GitHub</a>
       </div>
     </div>
   </footer>
