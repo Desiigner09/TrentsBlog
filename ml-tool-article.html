@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creating a simple tool that uses Machine Learning, APIs, AI & More — Trent's Blog</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --primary:#2563eb;
+        --bg:#e8e8e9;
+        --card:#ffffff;
+        --muted:#64748b;
+        --text:#334155;
+        --heading:#0f172a;
+      }
+
+      html{ scroll-behavior: smooth }
+
+      body{
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .glass{
+        background: rgba(255,255,255,0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(226,232,240,0.6);
+      }
+
+      main{
+        max-width: 960px;
+        margin: 6rem auto 3rem;
+        padding: 0 1.5rem;
+      }
+
+      .article-card{
+        background: var(--card);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(226,232,240,0.7);
+        box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+      }
+
+      h1, h2, h3{
+        color: var(--heading);
+      }
+
+      .meta{
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .content p,
+      .content li{
+        color: var(--text);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .content ul{
+        margin-left: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content ol{
+        margin-left: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content h2{
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--heading);
+      }
+
+      .content h3{
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--heading);
+        scroll-margin-top: 100px;
+      }
+
+      /* Table of Contents / Tags */
+      .article-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(226,232,240,0.7);
+      }
+
+      .article-tag {
+        display: inline-block;
+        padding: 0.4rem 0.9rem;
+        background: #f1f5f9;
+        color: var(--text);
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .article-tag:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        transform: translateY(-1px);
+      }
+
+      /* Constrain article images so they don't become too tall */
+      .content img {
+        width: 100%;
+        max-height: 600px;
+        object-fit: cover;
+        display: block;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+      }
+
+      /* Image row for multiple images */
+      .image-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .image-row img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+        background: #f8fafc;
+        margin: 0;
+      }
+
+      footer{
+        text-align: center;
+        padding: 2rem;
+        color: var(--muted);
+      }
+
+      .back-link{
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .back-link:hover{
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+      <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="index.html" class="text-xl font-bold hover:text-blue-600 transition-colors flex items-center gap-2">Trent's Blog</a>
+
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html#posts" class="text-sm font-medium hover:text-blue-600 transition-colors">Posts</a>
+          <a href="index.html#my-apps" class="text-sm font-medium hover:text-blue-600 transition-colors">My Apps</a>
+          <a href="resume.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Resume</a>
+        </nav>
+
+        <button class="md:hidden p-2 hover:bg-slate-100 rounded-md" onclick="toggleMobileMenu()">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-4 shadow-lg">
+        <a href="index.html#posts" class="block text-sm font-medium" onclick="toggleMobileMenu()">Posts</a>
+        <a href="index.html#my-apps" class="block text-sm font-medium" onclick="toggleMobileMenu()">My Apps</a>
+        <a href="resume.html" class="block text-sm font-medium" onclick="toggleMobileMenu()">Resume</a>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main>
+      <article class="article-card">
+        <div class="meta">Jan 2026</div>
+        <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-4">Creating a simple tool that uses Machine Learning, APIs, AI & More</h1>
+
+        <div class="article-tags">
+          <a href="#machine-learning" class="article-tag">Machine Learning</a>
+          <a href="#web-scraping" class="article-tag">Web Scraping/SEO</a>
+          <a href="#google-apis" class="article-tag">Google APIs</a>
+          <a href="#ai-nlp" class="article-tag">AI & NLP</a>
+        </div>
+
+        <div class="content">
+
+          <h2>What the app does & why I decided to create it</h2>
+          <p>I wanted to see - just by using a property address, what kind of information I could pull into a web app that would be useful for assessing competitors in the market.</p>
+          <p>Plus, I thought it would be a fun challenge to build a tool that uses Machine Learning, APIs, etc. as I continue to learn about these systems/technologies and various use cases.</p>
+          <p>In short, the app does the following:</p>
+
+          <ol>
+            <li><strong>1. Retrieves images of the property (street view & aerial)</strong></li>
+            <li><strong>2. Pulls in demographic data (zip code)</strong></li>
+            <li><strong>3. Creates a map with pins of nearby competitors</strong></li>
+            <li><strong>4. Creates a list of competitors with distances, SEO ranking, customer sentiment and more</strong></li>
+          </ol>
+
+          <p><em>So, how does this work?</em></p>
+
+          <h3 id="machine-learning">Machine Learning</h3>
+          <ol>
+            <li>First <strong>TensorFlow/Keras</strong> models were pre-trained with self storage imagery (street view and aerial views for Class A, B, C properties).</li>
+            <li>The python script retrieves the subject property address then processes the photos.</li>
+            <li>The model outputs the Class and displays a % confidence.</li>
+          </ol>
+
+          <img src="images/machinelearning1.png" alt="Machine Learning Model Training" class="my-6 rounded-lg shadow-md">
+
+          <p><em>Street view images are hit and miss and often have vehicles/off angles so it's hard to really train the model well on this view. The aerials are much better but still there are some limitations depending on Class B/C properties and the subtle differences from the aerial imagery.</em></p>
+
+          <h3 id="web-scraping">Web Scraping/SEO check</h3>
+          <ol>
+            <li>For each competitor URL there is a HTTP GET request made and the script uses <strong>BeautifulSoup</strong> library to check for basic SEO elements.</li>
+            <li>1. Page title</li>
+            <li>2. Meta description</li>
+            <li>3. Mobile viewport tag</li>
+          </ol>
+
+            <p><em>This can be challenging with REIT websites (extra space, public storage etc) given the anti-scraping features and dynamically loaded content. So the default if it is a REIT property, there is a high SEO score given.</em></p>
+            <img src="images/machinelearning2.png" alt="Machine Learning Classification" class="my-6 rounded-lg shadow-md">
+          <h3 id="google-apis">Google APIs (Geocode & Places)</h3>
+          <ol>
+            <li><strong>Geocoding API</strong> converts the subject property address into latitude and longitude coordinates, enabling accurate mapping and spatial analysis.</li>
+            <li><strong>Google Places API</strong> is used to automatically identify nearby self-storage competitors, pull location details, website URLs, and customer reviews.</li>
+          </ol>
+
+          <h3 id="ai-nlp">AI & Natural Language Processing (Customer Sentiment)</h3>
+          <ol>
+            <li>Customer reviews pulled from Google are analyzed using <strong>natural language processing NLP</strong> to estimate overall sentiment.</li>
+            <li>Reviews are scanned for common themes (pricing, cleanliness, staff behavior, access, etc.), and a concise summary of customer perception is generated.</li>
+          </ol>
+
+          <img src="images/machinelearning3.png" alt="Machine Learning Results" class="my-6 rounded-lg shadow-md">
+
+        </div>
+      </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="max-w-3xl mx-auto px-6 py-8 flex justify-between items-center text-sm">
+        <div>© <span id="current-year"></span> Trent's Blog</div>
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      lucide.createIcons();
+
+      function toggleMobileMenu(){
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+      }
+    </script>
+
+  </body>
+</html>

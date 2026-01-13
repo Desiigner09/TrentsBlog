@@ -79,6 +79,99 @@
     /* Selection styling (selection:bg-primary selection:text-white) */
     ::selection { background: #2563eb; color: #ffffff; }
     ::-moz-selection { background: #2563eb; color: #ffffff; }
+
+    /* Post card image styling - optimized for high resolution */
+    .post-card-image-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-card-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      image-rendering: auto;
+      -ms-interpolation-mode: bicubic;
+    }
+
+      .post-card-image-date {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #64748b;
+        margin-top: 0.25rem;
+      }
+
+      /* Post card tags */
+      .post-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-card-tag {
+        display: inline-block;
+        padding: 0.3rem 0.7rem;
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: default;
+      }
+
+      /* Filter tags under Latest Posts */
+      .filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+      }
+
+      .filter-tag {
+        display: inline-block;
+        padding: 0.4rem 0.9rem;
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .filter-tag:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        transform: translateY(-1px);
+      }
+
+    @media (min-width: 768px) {
+      .post-card-with-image {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+      
+      .post-card-image-container {
+        width: 320px;
+        min-width: 320px;
+      }
+      
+      .post-card-image {
+        width: 100%;
+        height: 220px;
+        margin-bottom: 0.5rem;
+      }
+    }
   </style>
   </head>
   <body>
@@ -153,65 +246,127 @@
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">2025 Archive</span>
       </div>
 
+      <div class="filter-tags">
+        <a href="#post-ml-tool" class="filter-tag">Machine Learning</a>
+        <a href="#post-travel" class="filter-tag">Travel</a>
+        <a href="#post-investment" class="filter-tag">Investments</a>
+        <a href="#post-ml-tool" class="filter-tag">AI</a>
+        <a href="#post-app" class="filter-tag">App/Software</a>
+      </div>
+
       <div class="space-y-6">
 
          <!-- Post 1 -->
-        <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
-          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
-            <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
-              <a href="travel2025.html" class="relative inline-block">
-                <span class="absolute inset-0"></span>
-                My Year of Traveling in 2025
-              </a>
-            </h3>
-            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
+        <article id="post-ml-tool" class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up post-card-with-image scroll-mt-24" style="animation-delay: 0.1s;">
+          <div class="post-card-image-container">
+            <img src="images/machinelearning1.png" alt="ML Tool for Self Storage Analysis" class="post-card-image">
+            <div class="post-card-image-date">Jan 2026</div>
           </div>
-          <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
-            Reflections on travel, business insights, and life experiences from a year spent exploring Southeast Asia and Europe.
-          </p>
-          <div class="flex items-center text-sm text-primary font-medium">
-            <a href="travel2025.html" class="font-medium text-primary hover:underline">Read more</a>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+          <div class="flex-1">
+            <div class="mb-3">
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
+                <a href="ml-tool-article.html" class="relative inline-block">
+                  <span class="absolute inset-0"></span>
+                  Creating a simple tool that uses Machine Learning, APIs, AI & More
+                </a>
+              </h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
+              Building a self storage property analysis tool using TensorFlow, Google APIs, web scraping, and NLP for competitor analysis and customer sentiment.
+            </p>
+            <div class="flex items-center text-sm text-primary font-medium mb-3">
+              <a href="ml-tool-article.html" class="font-medium text-primary hover:underline">Read more</a>
+              <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+            </div>
+            <div class="post-card-tags">
+              <span class="post-card-tag">Machine Learning</span>
+              <span class="post-card-tag">AI</span>
+              <span class="post-card-tag">App/Software</span>
+            </div>
           </div>
         </article>
         
-        <!-- Post 2 -->
-        <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
-          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
+         <!-- Post 2 -->
+        <article id="post-travel" class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up post-card-with-image scroll-mt-24" style="animation-delay: 0.1s;">
+          <div class="post-card-image-container">
+            <img src="images/Travel1.jpg" alt="2025 Travel Recap" class="post-card-image">
+            <div class="post-card-image-date">Dec 2025</div>
+          </div>
+          <div class="flex-1">
+            <div class="mb-3">
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
+                <a href="travel2025.html" class="relative inline-block">
+                  <span class="absolute inset-0"></span>
+                2025 Travel Recap
+                </a>
+              </h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
+              Reflections on travel, business insights, and life experiences from a year spent exploring Southeast Asia and Europe.
+            </p>
+            <div class="flex items-center text-sm text-primary font-medium mb-3">
+              <a href="travel2025.html" class="font-medium text-primary hover:underline">Read more</a>
+              <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+            </div>
+            <div class="post-card-tags">
+              <span class="post-card-tag">Travel</span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Post 3 -->
+        <article id="post-investment" class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up post-card-with-image scroll-mt-24" style="animation-delay: 0.1s;">
+          <div class="post-card-image-container">
+            <img src="images/mystorage.jpg" alt="Self Storage Facility in Vietnam" class="post-card-image">
+            <div class="post-card-image-date">Dec 2025</div>
+          </div>
+          <div class="flex-1">
+            <div class="mb-3">
             <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
               <a href="mystoragestory.html" class="relative inline-block">
                 <span class="absolute inset-0"></span>
                 Why I Invested In a Self Storage Facility In Vietnam
               </a>
             </h3>
-            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
           </div>
           <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
             Self storage is a maturing industry in the US but opportunities exist abroad.
           </p>
-          <div class="flex items-center text-sm text-primary font-medium">
+            <div class="flex items-center text-sm text-primary font-medium mb-3">
             <a href="mystoragestory.html" class="font-medium text-primary hover:underline">Read more</a>
             <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+            </div>
+            <div class="post-card-tags">
+              <span class="post-card-tag">Investments</span>
+            </div>
           </div>
         </article>
         
-        <!-- Post 3 -->
-        <article class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
-          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-3 gap-2">
+        <!-- Post 4 -->
+        <article id="post-app" class="group relative bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-100 transition-all duration-300 animate-fade-in-up post-card-with-image scroll-mt-24" style="animation-delay: 0.1s;">
+          <div class="post-card-image-container">
+            <img src="images/storagemap.png" alt="Web App Screenshot" class="post-card-image">
+            <div class="post-card-image-date">Dec 2025</div>
+          </div>
+          <div class="flex-1">
+            <div class="mb-3">
             <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
               <a href="whatilearnedarticle.html" class="relative inline-block">
                 <span class="absolute inset-0"></span>
                 What I Learned Building My First Web App
               </a>
             </h3>
-            <time class="text-xs font-medium text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-1 rounded-full border border-slate-100">Dec 2025</time>
           </div>
           <p class="text-slate-600 leading-relaxed mb-4 line-clamp-2">
             Sharing insights and challenges of creating a web app (no prior experience).
           </p>
-          <div class="flex items-center text-sm text-primary font-medium">
+            <div class="flex items-center text-sm text-primary font-medium mb-3">
             <a href="whatilearnedarticle.html" class="font-medium text-primary hover:underline">Read more</a>
             <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+            </div>
+            <div class="post-card-tags">
+              <span class="post-card-tag">App/Software</span>
+            </div>
           </div>
         </article>
 
@@ -246,6 +401,32 @@
               </h3>
               <p class="text-slate-300 leading-relaxed text-sm md:text-base">
                 Self-storage market data platform for investors and developers infused with AI.
+              </p>
+            </div>
+            
+            <div class="hidden md:block">
+               <span class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold group-hover:bg-blue-500 transition-colors">
+                 Visit App
+               </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- App Card 2 -->
+        <a href="https://urbanoracle-plum.vercel.app/" target="_blank" rel="noopener" class="group block bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
+            <!-- Icon Placeholder -->
+            <div class="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+              <i data-lucide="home" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                Urban Oracle (In Progress)
+                <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors"></i>
+              </h3>
+              <p class="text-slate-300 leading-relaxed text-sm md:text-base">
+                Hyperlocal real estate app focused in Hillsborough County, Florida.
               </p>
             </div>
             
