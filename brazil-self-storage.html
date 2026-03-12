@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exploring Self Storage In Brazil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --primary:#2563eb;
+        --bg:#e8e8e9;
+        --card:#ffffff;
+        --muted:#64748b;
+        --text:#334155;
+        --heading:#0f172a;
+      }
+
+      html{ scroll-behavior: smooth }
+
+      body{
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .glass{
+        background: rgba(255,255,255,0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(226,232,240,0.6);
+      }
+
+      main{
+        max-width: 960px;
+        margin: 6rem auto 3rem;
+        padding: 0 1.5rem;
+      }
+
+      .article-card{
+        background: var(--card);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(226,232,240,0.7);
+        box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+      }
+
+      h1, h2, h3{
+        color: var(--heading);
+      }
+
+      .meta{
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .content p,
+      .content li{
+        color: var(--text);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .content h2{
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .content ul{
+        margin-left: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content img {
+        width: 100%;
+        max-height: 600px;
+        object-fit: cover;
+        display: block;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+      }
+
+      .photo-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+      }
+
+      .photo-row img {
+        width: calc(50% - 0.5rem);
+        max-width: 460px;
+        max-height: 340px;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: 8px;
+        background: #f8fafc;
+      }
+
+      .photo-row-3 {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+      }
+
+      .photo-row-3 img {
+        width: calc(33.333% - 0.5rem);
+        max-width: 300px;
+        max-height: 220px;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: 8px;
+        background: #f8fafc;
+      }
+
+      footer{
+        text-align: center;
+        padding: 2rem;
+        color: var(--muted);
+      }
+
+      .back-link{
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .back-link:hover{
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+      <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="index.html" class="text-xl font-bold hover:text-blue-600 transition-colors flex items-center gap-2">Trent's Blog</a>
+
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html#posts" class="text-sm font-medium hover:text-blue-600 transition-colors">Posts</a>
+          <a href="index.html#my-apps" class="text-sm font-medium hover:text-blue-600 transition-colors">My Apps</a>
+          <a href="resume.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Resume</a>
+        </nav>
+
+        <button class="md:hidden p-2 hover:bg-slate-100 rounded-md" onclick="toggleMobileMenu()">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-4 shadow-lg">
+        <a href="index.html#posts" class="block text-sm font-medium" onclick="toggleMobileMenu()">Posts</a>
+        <a href="index.html#my-apps" class="block text-sm font-medium" onclick="toggleMobileMenu()">My Apps</a>
+        <a href="resume.html" class="block text-sm font-medium" onclick="toggleMobileMenu()">Resume</a>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main>
+      <article class="article-card">
+        <div class="meta">Mar 2026</div>
+        <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-2">Exploring Self Storage In Brazil</h1>
+        <p class="meta mb-6">São Paulo · Rio de Janeiro</p>
+
+        <div class="content">
+
+          <p>Brazil has to be one of my favorite countries.</p>
+
+          <p>I visited in March 2026 — the purpose of my trip was primarily for business but I was able to explore Rio de Janeiro and São Paulo. (I wish I stayed longer!)</p>
+          <img src="images/brazil6.jpg" alt="Christ the Redeemer or Sugarloaf view, Rio" class="shadow-md">
+          <h2>São Paulo</h2>
+
+          <p>My first stop was in São Paulo where I met with the owners of the Moby Self Storage portfolio. What surprised me about São Paulo is the density of the infrastructure and how many residential &amp; office towers are there. It reminded me of the density you would find in a city like Bangkok!</p>
+
+        
+            <img src="images/brazil10.jpg" alt="São Paulo" class="shadow-md">
+          
+
+          <p>The first property I visited was XXX which is located on a busy road just in front of the facility. The unique colors of the property make it hard to miss! Additionally the large drive-up units for e-commerce/contractors and other businesses to utilize is a feature I've not seen in many storage properties.</p>
+
+          <div class="photo-row">
+            <img src="images/brazil1.jpg" alt="Brazil trip" class="shadow-md">
+            <img src="images/brazil2.jpg" alt="São Paulo self storage property" class="shadow-md">
+            <img src="images/brazil3.jpg" alt="São Paulo self storage" class="shadow-md">
+          </div>
+
+          <p>Next, I visited a vacant lot that is approved for self storage development. The concept would be constructing a vertical storage facility with as many as 9 floors + retail tenants on the first to further anchor interest to the property.</p>
+
+          <p>Although I only spent about 72 hours in SP — I will be going back at some point to explore the city.</p>
+          <img src="images/brazil4.jpg" alt="São Paulo development site" class="shadow-md">
+          <h2>Rio de Janeiro</h2>
+
+          <p>The remainder of my trip was staying in Copacabana — just a few minutes walking to the beach! Personally, I loved the vibe here! You'll find people constantly running, walking, riding bikes, playing volleyball, and enjoying the beach. It really doesn't matter the time of the day either.</p>
+
+          <img src="images/brazil5.jpg" alt="Copacabana, Rio de Janeiro" class="shadow-md">
+
+          <p>The attractions here would be Christ The Redeemer &amp; Sugarloaf Mountain. I only had time to see CTR but it was an amazing experience! (Although very crowded). The views from this point were absolutely incredible. Although I didn't make it to Sugarloaf, there is a beach near the mountain that you can relax and it makes for an incredible view. You can take cable cars up to the view points (they also have a DJ that performs there too).</p>
+
+          <img src="images/brazil11.jpg" alt="Rio de Janeiro" class="shadow-md">
+
+          <div class="photo-row">
+            <img src="images/brazil7.jpg" alt="Rio de Janeiro" class="shadow-md">
+            <img src="images/brazil9.jpg" alt="São Paulo" class="shadow-md">
+          </div>
+
+          <p>Aside from the attractions, I toured the remaining self storage properties scattered in Rio. One area that really caught my attention was Barra da Tijuca (or "Barra"). This is a prime area where the wealthier class in Rio reside. What makes it unique is a long stretch of road that extends through the city and on either side you'll find retail, shops, markets, malls and everything else you may need + the beach on the side! (It wasn't crowded either).</p>
+
+          <img src="images/brazil12.jpg" alt="Barra da Tijuca or Rio" class="shadow-md">
+
+          <p>The other stops in Rio consisted of Porto Maravilha &amp; São Cristóvão.</p>
+
+          <p>Porto Maravilha is experiencing a massive shift in infrastructure redevelopment and additional residential towers constructed by Curry. This location is adjacent to the Port and has a long runway for growth.</p>
+
+          <p>São Cristóvão is expediting some redevelopment in the area as well.</p>
+
+          <p>This trip left an impression on me and I will definitely be returning to Brazil very soon!</p>
+
+          <img src="images/brazil8.jpg" alt="Brazil trip" class="shadow-md">
+
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <a href="index.html#posts" class="back-link">← Back to Home</a>
+          <div class="text-sm text-slate-400">Thanks for reading</div>
+        </div>
+      </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="max-w-3xl mx-auto px-6 py-8 flex justify-between items-center text-sm">
+        <div>© <span id="current-year"></span> Trent's Blog</div>
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      lucide.createIcons();
+
+      function toggleMobileMenu(){
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+      }
+    </script>
+
+  </body>
+</html>
