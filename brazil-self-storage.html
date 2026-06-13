@@ -1,265 +1,173 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Exploring Self Storage In Brazil</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Exploring Self Storage In Brazil — Trent Kloter</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --ink: #1b2330; --ink-soft: #2c3a4c;
+    --paper: #ece8df; --paper-soft: #f6f4ee; --paper-dim: #d9d3c5;
+    --blueprint: #4c6a87; --blueprint-soft: #87a0b6;
+    --signal: #e8732e; --mist: #9aa7b8;
+    --max-w: 1180px; --article-w: 800px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{ margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:var(--paper); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; line-height:1.15; margin:0; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:0.04em; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--signal); margin:0 0 1rem; }
+  .container{ max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; }
 
-    <style>
-      :root {
-        --primary:#2563eb;
-        --bg:#e8e8e9;
-        --card:#ffffff;
-        --muted:#64748b;
-        --text:#334155;
-        --heading:#0f172a;
-      }
+  .section--dark{ background:var(--ink); color:var(--paper-soft); }
+  .grid-tex{
+    background-image: linear-gradient(rgba(76,106,135,.35) 1px,transparent 1px), linear-gradient(90deg,rgba(76,106,135,.35) 1px,transparent 1px);
+    background-size:48px 48px; background-position:-1px -1px;
+  }
 
-      html{ scroll-behavior: smooth }
+  /* NAV */
+  .nav{ position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(27,35,48,0.82); backdrop-filter:blur(10px); border-bottom:1px solid rgba(135,160,182,0.25); }
+  .nav__inner{ max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; height:64px; display:flex; align-items:center; justify-content:center; }
+  .nav__links{ display:flex; gap:2rem; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.06em; }
+  .nav__links a{ text-decoration:none; color:var(--mist); transition:color 0.2s; }
+  .nav__links a:hover{ color:var(--signal); }
+  @media(max-width:760px){ .nav__links{ display:none; } }
 
-      body{
-        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-        background: var(--bg);
-        color: var(--text);
-        -webkit-font-smoothing: antialiased;
-      }
+  /* ARTICLE HERO */
+  .article-hero{ padding:8rem 0 4rem; }
+  .article-hero h1{ font-size:clamp(1.8rem,4vw,3rem); margin:0.75rem 0 0; max-width:44rem; color:var(--paper-soft); }
+  .article-hero .sub{ font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--mist); margin-top:0.75rem; letter-spacing:0.04em; }
 
-      .glass{
-        background: rgba(255,255,255,0.75);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(226,232,240,0.6);
-      }
+  /* ARTICLE BODY */
+  .article-main{ padding:4rem 0 6rem; }
+  .article-body{ max-width:var(--article-w); }
 
-      main{
-        max-width: 960px;
-        margin: 6rem auto 3rem;
-        padding: 0 1.5rem;
-      }
+  .content p, .content li{ color:var(--ink-soft); line-height:1.75; margin-bottom:1.1rem; font-size:1.02rem; }
+  .content h2{ font-size:1.5rem; margin:2.5rem 0 0.75rem; color:var(--ink); }
+  .content h3{ font-size:1.15rem; margin:2rem 0 0.6rem; color:var(--ink); }
+  .content ul, .content ol{ margin-left:1.25rem; margin-bottom:1.5rem; }
+  .content strong{ color:var(--ink); }
+  .content em{ color:var(--blueprint); }
+  .content a{ color:var(--signal); text-underline-offset:2px; }
 
-      .article-card{
-        background: var(--card);
-        border-radius: 16px;
-        padding: 2rem;
-        border: 1px solid rgba(226,232,240,0.7);
-        box-shadow: 0 10px 30px rgba(2,6,23,0.06);
-      }
+  .content img{ width:100%; max-height:600px; object-fit:cover; display:block; margin:2rem 0; border-radius:6px; border:1px solid var(--paper-dim); }
 
-      h1, h2, h3{
-        color: var(--heading);
-      }
+  .photo-row{ display:flex; gap:1rem; justify-content:center; align-items:flex-start; flex-wrap:wrap; margin:2rem 0; }
+  .photo-row img{ width:calc(50% - 0.5rem); max-width:460px; max-height:340px; object-fit:cover; object-position:center; display:block; border-radius:6px; border:1px solid var(--paper-dim); margin:0; }
 
-      .meta{
-        color: var(--muted);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
+  .photo-row-3{ display:flex; gap:0.75rem; justify-content:center; align-items:flex-start; flex-wrap:wrap; margin:2rem 0; }
+  .photo-row-3 img{ width:calc(33.333% - 0.5rem); max-width:300px; max-height:220px; object-fit:cover; object-position:center; display:block; border-radius:6px; border:1px solid var(--paper-dim); margin:0; }
 
-      .content p,
-      .content li{
-        color: var(--text);
-        line-height: 1.7;
-        margin-bottom: 1rem;
-      }
+  /* BACK LINK */
+  .article-footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--paper-dim); display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; color:var(--blueprint); text-decoration:none; transition:color 0.2s; }
+  .back-link:hover{ color:var(--signal); }
 
-      .content h2{
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-      }
+  /* FOOTER */
+  .footer{ border-top:1px solid rgba(135,160,182,0.25); padding:2rem 0; font-size:0.78rem; color:var(--mist); }
+</style>
+</head>
+<body>
 
-      .content ul{
-        margin-left: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
+<header class="nav">
+  <div class="nav__inner">
+    <nav class="nav__links">
+      <a href="index.html#work">What I Do</a>
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-      .content img {
-        width: 100%;
-        max-height: 600px;
-        object-fit: cover;
-        display: block;
-        margin: 1.5rem 0;
-        border-radius: 8px;
-      }
+<section class="article-hero section--dark grid-tex">
+  <div class="container">
+    <p class="eyebrow">Mar 2026 · Travel · Investments</p>
+    <h1>Exploring Self Storage In Brazil</h1>
+    <p class="sub">São Paulo · Rio de Janeiro</p>
+  </div>
+</section>
 
-      .photo-row {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        margin: 1.5rem 0;
-      }
+<main class="article-main">
+  <div class="container article-body">
+    <div class="content">
 
-      .photo-row img {
-        width: calc(50% - 0.5rem);
-        max-width: 460px;
-        max-height: 340px;
-        object-fit: cover;
-        object-position: center;
-        display: block;
-        border-radius: 8px;
-        background: #f8fafc;
-      }
+      <p>Brazil has to be one of my favorite countries.</p>
 
-      .photo-row-3 {
-        display: flex;
-        gap: 0.75rem;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        margin: 1.5rem 0;
-      }
+      <p>I visited in March 2026 — the purpose of my trip was primarily for business but I was able to explore Rio de Janeiro and São Paulo. (I wish I stayed longer!)</p>
+      <img src="images/brazil6.jpg" alt="Christ the Redeemer or Sugarloaf view, Rio">
+      <h2>São Paulo</h2>
 
-      .photo-row-3 img {
-        width: calc(33.333% - 0.5rem);
-        max-width: 300px;
-        max-height: 220px;
-        object-fit: cover;
-        object-position: center;
-        display: block;
-        border-radius: 8px;
-        background: #f8fafc;
-      }
+      <p>My first stop was in São Paulo where I met with the owners of the Moby Self Storage portfolio. What surprised me about São Paulo is the density of the infrastructure and how many residential &amp; office towers are there. It reminded me of the density you would find in a city like Bangkok!</p>
 
-      footer{
-        text-align: center;
-        padding: 2rem;
-        color: var(--muted);
-      }
+      <img src="images/brazil10.jpg" alt="São Paulo">
 
-      .back-link{
-        color: var(--muted);
-        text-decoration: none;
-      }
+      <p>The first property I visited was Vila Leopoldina which is located on a busy road just in front of the facility. The unique colors of the property make it hard to miss! Additionally the large drive-up units for e-commerce/contractors and other businesses to utilize is a feature I've not seen in many storage properties.</p>
 
-      .back-link:hover{
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <!-- NAV -->
-    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
-      <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="index.html" class="text-xl font-bold hover:text-blue-600 transition-colors flex items-center gap-2">Trent's Blog</a>
-
-        <nav class="hidden md:flex items-center gap-8">
-          <a href="index.html#posts" class="text-sm font-medium hover:text-blue-600 transition-colors">Posts</a>
-          <a href="index.html#my-apps" class="text-sm font-medium hover:text-blue-600 transition-colors">My Apps</a>
-          <a href="resume.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Resume</a>
-        </nav>
-
-        <button class="md:hidden p-2 hover:bg-slate-100 rounded-md" onclick="toggleMobileMenu()">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+      <div class="photo-row">
+        <img src="images/brazil1.jpg" alt="Brazil trip">
+        <img src="images/brazil2.jpg" alt="São Paulo self storage property">
+        <img src="images/brazil3.jpg" alt="São Paulo self storage">
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-4 shadow-lg">
-        <a href="index.html#posts" class="block text-sm font-medium" onclick="toggleMobileMenu()">Posts</a>
-        <a href="index.html#my-apps" class="block text-sm font-medium" onclick="toggleMobileMenu()">My Apps</a>
-        <a href="resume.html" class="block text-sm font-medium" onclick="toggleMobileMenu()">Resume</a>
+      <p>Next, I visited a vacant lot that is approved for self storage development. The concept would be constructing a vertical storage facility with as many as 9 floors + retail tenants on the first to further anchor interest to the property.</p>
+
+      <p>Although I only spent about 72 hours in SP — I will be going back at some point to explore the city.</p>
+      <img src="images/brazil4.jpg" alt="São Paulo development site">
+      <h2>Rio de Janeiro</h2>
+
+      <p>The remainder of my trip was staying in Copacabana — just a few minutes walking to the beach! Personally, I loved the vibe here! You'll find people constantly running, walking, riding bikes, playing volleyball, and enjoying the beach. It really doesn't matter the time of the day either.</p>
+
+      <img src="images/brazil5.jpg" alt="Copacabana, Rio de Janeiro">
+
+      <p>The attractions here would be Christ The Redeemer &amp; Sugarloaf Mountain. I only had time to see CTR but it was an amazing experience! (Although very crowded). The views from this point were absolutely incredible. Although I didn't make it to Sugarloaf, there is a beach near the mountain that you can relax and it makes for an incredible view. You can take cable cars up to the view points (they also have a DJ that performs there too).</p>
+
+      <img src="images/brazil11.jpg" alt="Rio de Janeiro">
+
+      <div class="photo-row">
+        <img src="images/brazil7.jpg" alt="Rio de Janeiro">
+        <img src="images/brazil9.jpg" alt="São Paulo">
       </div>
-    </header>
 
-    <!-- CONTENT -->
-    <main>
-      <article class="article-card">
-        <div class="meta">Mar 2026</div>
-        <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-2">Exploring Self Storage In Brazil</h1>
-        <p class="meta mb-6">São Paulo · Rio de Janeiro</p>
+      <p>Aside from the attractions, I toured the remaining self storage properties scattered in Rio. One area that really caught my attention was Barra da Tijuca (or "Barra"). This is a prime area where the wealthier class in Rio reside. What makes it unique is a long stretch of road that extends through the city and on either side you'll find retail, shops, markets, malls and everything else you may need + the beach on the side! (It wasn't crowded either).</p>
 
-        <div class="content">
+      <img src="images/brazil12.jpg" alt="Barra da Tijuca, Rio">
 
-          <p>Brazil has to be one of my favorite countries.</p>
+      <p>The other stops in Rio consisted of Porto Maravilha &amp; São Cristóvão.</p>
 
-          <p>I visited in March 2026 — the purpose of my trip was primarily for business but I was able to explore Rio de Janeiro and São Paulo. (I wish I stayed longer!)</p>
-          <img src="images/brazil6.jpg" alt="Christ the Redeemer or Sugarloaf view, Rio" class="shadow-md">
-          <h2>São Paulo</h2>
+      <p>Porto Maravilha is experiencing a massive shift in infrastructure redevelopment and additional residential towers constructed by Curry. This location is adjacent to the Port and has a long runway for growth.</p>
 
-          <p>My first stop was in São Paulo where I met with the owners of the Moby Self Storage portfolio. What surprised me about São Paulo is the density of the infrastructure and how many residential &amp; office towers are there. It reminded me of the density you would find in a city like Bangkok!</p>
+      <p>São Cristóvão is expediting some redevelopment in the area as well.</p>
 
-        
-            <img src="images/brazil10.jpg" alt="São Paulo" class="shadow-md">
-          
+      <p>This trip left an impression on me and I will definitely be returning to Brazil very soon!</p>
 
-          <p>The first property I visited was Vila Leopoldina which is located on a busy road just in front of the facility. The unique colors of the property make it hard to miss! Additionally the large drive-up units for e-commerce/contractors and other businesses to utilize is a feature I've not seen in many storage properties.</p>
+      <img src="images/brazil8.jpg" alt="Brazil trip">
 
-          <div class="photo-row">
-            <img src="images/brazil1.jpg" alt="Brazil trip" class="shadow-md">
-            <img src="images/brazil2.jpg" alt="São Paulo self storage property" class="shadow-md">
-            <img src="images/brazil3.jpg" alt="São Paulo self storage" class="shadow-md">
-          </div>
+    </div>
 
-          <p>Next, I visited a vacant lot that is approved for self storage development. The concept would be constructing a vertical storage facility with as many as 9 floors + retail tenants on the first to further anchor interest to the property.</p>
+    <div class="article-footer">
+      <a href="index.html#blog" class="back-link">← Back to blog</a>
+      <span class="mono" style="font-size:0.75rem;color:var(--mist)">Thanks for reading</span>
+    </div>
+  </div>
+</main>
 
-          <p>Although I only spent about 72 hours in SP — I will be going back at some point to explore the city.</p>
-          <img src="images/brazil4.jpg" alt="São Paulo development site" class="shadow-md">
-          <h2>Rio de Janeiro</h2>
+<footer class="section--dark">
+  <div class="container footer mono">
+    <span>© <span id="current-year"></span></span>
+  </div>
+</footer>
 
-          <p>The remainder of my trip was staying in Copacabana — just a few minutes walking to the beach! Personally, I loved the vibe here! You'll find people constantly running, walking, riding bikes, playing volleyball, and enjoying the beach. It really doesn't matter the time of the day either.</p>
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 
-          <img src="images/brazil5.jpg" alt="Copacabana, Rio de Janeiro" class="shadow-md">
-
-          <p>The attractions here would be Christ The Redeemer &amp; Sugarloaf Mountain. I only had time to see CTR but it was an amazing experience! (Although very crowded). The views from this point were absolutely incredible. Although I didn't make it to Sugarloaf, there is a beach near the mountain that you can relax and it makes for an incredible view. You can take cable cars up to the view points (they also have a DJ that performs there too).</p>
-
-          <img src="images/brazil11.jpg" alt="Rio de Janeiro" class="shadow-md">
-
-          <div class="photo-row">
-            <img src="images/brazil7.jpg" alt="Rio de Janeiro" class="shadow-md">
-            <img src="images/brazil9.jpg" alt="São Paulo" class="shadow-md">
-          </div>
-
-          <p>Aside from the attractions, I toured the remaining self storage properties scattered in Rio. One area that really caught my attention was Barra da Tijuca (or "Barra"). This is a prime area where the wealthier class in Rio reside. What makes it unique is a long stretch of road that extends through the city and on either side you'll find retail, shops, markets, malls and everything else you may need + the beach on the side! (It wasn't crowded either).</p>
-
-          <img src="images/brazil12.jpg" alt="Barra da Tijuca or Rio" class="shadow-md">
-
-          <p>The other stops in Rio consisted of Porto Maravilha &amp; São Cristóvão.</p>
-
-          <p>Porto Maravilha is experiencing a massive shift in infrastructure redevelopment and additional residential towers constructed by Curry. This location is adjacent to the Port and has a long runway for growth.</p>
-
-          <p>São Cristóvão is expediting some redevelopment in the area as well.</p>
-
-          <p>This trip left an impression on me and I will definitely be returning to Brazil very soon!</p>
-
-          <img src="images/brazil8.jpg" alt="Brazil trip" class="shadow-md">
-
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-          <a href="index.html#posts" class="back-link">← Back to Home</a>
-          <div class="text-sm text-slate-400">Thanks for reading</div>
-        </div>
-      </article>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="max-w-3xl mx-auto px-6 py-8 flex justify-between items-center text-sm">
-        <div>© <span id="current-year"></span> Trent's Blog</div>
-      </div>
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script>
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-      lucide.createIcons();
-
-      function toggleMobileMenu(){
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      }
-    </script>
-
-  </body>
+</body>
 </html>

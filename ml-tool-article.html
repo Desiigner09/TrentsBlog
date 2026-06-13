@@ -1,284 +1,179 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Creating a simple tool that uses Machine Learning, APIs, AI & More — Trent's Blog</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creating a Tool Using ML, APIs &amp; AI — Trent Kloter</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --ink: #1b2330; --ink-soft: #2c3a4c;
+    --paper: #ece8df; --paper-soft: #f6f4ee; --paper-dim: #d9d3c5;
+    --blueprint: #4c6a87; --blueprint-soft: #87a0b6;
+    --signal: #e8732e; --mist: #9aa7b8;
+    --max-w: 1180px; --article-w: 800px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{ margin:0; font-family:'Inter',sans-serif; color:var(--ink); background:var(--paper); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; line-height:1.15; margin:0; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:0.04em; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--signal); margin:0 0 1rem; }
+  .container{ max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; }
 
-    <style>
-      :root {
-        --primary:#2563eb;
-        --bg:#e8e8e9;
-        --card:#ffffff;
-        --muted:#64748b;
-        --text:#334155;
-        --heading:#0f172a;
-      }
+  .section--dark{ background:var(--ink); color:var(--paper-soft); }
+  .grid-tex{
+    background-image: linear-gradient(rgba(76,106,135,.35) 1px,transparent 1px), linear-gradient(90deg,rgba(76,106,135,.35) 1px,transparent 1px);
+    background-size:48px 48px; background-position:-1px -1px;
+  }
 
-      html{ scroll-behavior: smooth }
+  /* NAV */
+  .nav{ position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(27,35,48,0.82); backdrop-filter:blur(10px); border-bottom:1px solid rgba(135,160,182,0.25); }
+  .nav__inner{ max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; height:64px; display:flex; align-items:center; justify-content:center; }
+  .nav__links{ display:flex; gap:2rem; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.06em; }
+  .nav__links a{ text-decoration:none; color:var(--mist); transition:color 0.2s; }
+  .nav__links a:hover{ color:var(--signal); }
+  @media(max-width:760px){ .nav__links{ display:none; } }
 
-      body{
-        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-        background: var(--bg);
-        color: var(--text);
-        -webkit-font-smoothing: antialiased;
-      }
+  /* ARTICLE HERO */
+  .article-hero{ padding:8rem 0 4rem; }
+  .article-hero h1{ font-size:clamp(1.8rem,4vw,3rem); margin:0.75rem 0 0; max-width:44rem; color:var(--paper-soft); }
 
-      .glass{
-        background: rgba(255,255,255,0.75);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(226,232,240,0.6);
-      }
+  /* ARTICLE BODY */
+  .article-main{ padding:4rem 0 6rem; }
+  .article-body{ max-width:var(--article-w); }
 
-      main{
-        max-width: 960px;
-        margin: 6rem auto 3rem;
-        padding: 0 1.5rem;
-      }
+  .content p, .content li{ color:var(--ink-soft); line-height:1.75; margin-bottom:1.1rem; font-size:1.02rem; }
+  .content h2{ font-size:1.5rem; margin:2.5rem 0 0.75rem; color:var(--ink); }
+  .content h3{ font-size:1.15rem; margin:2rem 0 0.6rem; color:var(--ink); scroll-margin-top:80px; }
+  .content ul, .content ol{ margin-left:1.25rem; margin-bottom:1.5rem; }
+  .content strong{ color:var(--ink); }
+  .content em{ color:var(--blueprint); font-style:italic; }
+  .content a{ color:var(--signal); text-underline-offset:2px; }
 
-      .article-card{
-        background: var(--card);
-        border-radius: 16px;
-        padding: 2rem;
-        border: 1px solid rgba(226,232,240,0.7);
-        box-shadow: 0 10px 30px rgba(2,6,23,0.06);
-      }
+  .content img{ width:100%; max-height:600px; object-fit:cover; display:block; margin:2rem 0; border-radius:6px; border:1px solid var(--paper-dim); }
 
-      h1, h2, h3{
-        color: var(--heading);
-      }
+  .image-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:2rem 0; }
+  .image-row img{ width:100%; max-height:400px; object-fit:contain; background:var(--paper-soft); margin:0; border-radius:6px; border:1px solid var(--paper-dim); }
 
-      .meta{
-        color: var(--muted);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
+  /* ARTICLE TAGS */
+  .article-tags{ display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.5rem 0 2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--paper-dim); }
+  .article-tag{ display:inline-block; padding:0.3rem 0.8rem; background:var(--paper-soft); color:var(--blueprint); border:1px solid var(--paper-dim); border-radius:4px; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.06em; text-decoration:none; transition:all 0.2s; }
+  .article-tag:hover{ background:var(--signal); color:var(--ink); border-color:var(--signal); }
 
-      .content p,
-      .content li{
-        color: var(--text);
-        line-height: 1.7;
-        margin-bottom: 1rem;
-      }
+  /* BACK LINK */
+  .article-footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--paper-dim); display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; color:var(--blueprint); text-decoration:none; transition:color 0.2s; }
+  .back-link:hover{ color:var(--signal); }
 
-      .content ul{
-        margin-left: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
+  /* FOOTER */
+  .footer{ border-top:1px solid rgba(135,160,182,0.25); padding:2rem 0; font-size:0.78rem; color:var(--mist); }
+</style>
+</head>
+<body>
 
-      .content ol{
-        margin-left: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
+<header class="nav">
+  <div class="nav__inner">
+    <nav class="nav__links">
+      <a href="index.html#work">What I Do</a>
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-      .content h2{
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        color: var(--heading);
-      }
+<section class="article-hero section--dark grid-tex">
+  <div class="container">
+    <p class="eyebrow">Jan 2026 · Machine Learning</p>
+    <h1>Creating a Tool Using ML, APIs &amp; AI</h1>
+  </div>
+</section>
 
-      .content h3{
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        color: var(--heading);
-        scroll-margin-top: 100px;
-      }
+<main class="article-main">
+  <div class="container article-body">
+    <div class="content">
 
-      /* Table of Contents / Tags */
-      .article-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid rgba(226,232,240,0.7);
-      }
-
-      .article-tag {
-        display: inline-block;
-        padding: 0.4rem 0.9rem;
-        background: #f1f5f9;
-        color: var(--text);
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
-
-      .article-tag:hover {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-        transform: translateY(-1px);
-      }
-
-      /* Constrain article images so they don't become too tall */
-      .content img {
-        width: 100%;
-        max-height: 600px;
-        object-fit: cover;
-        display: block;
-        margin: 1.5rem 0;
-        border-radius: 8px;
-      }
-
-      /* Image row for multiple images */
-      .image-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
-        margin: 1.5rem 0;
-      }
-
-      .image-row img {
-        width: 100%;
-        max-height: 400px;
-        object-fit: contain;
-        background: #f8fafc;
-        margin: 0;
-      }
-
-      footer{
-        text-align: center;
-        padding: 2rem;
-        color: var(--muted);
-      }
-
-      .back-link{
-        color: var(--muted);
-        text-decoration: none;
-      }
-
-      .back-link:hover{
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <!-- NAV -->
-    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
-      <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="index.html" class="text-xl font-bold hover:text-blue-600 transition-colors flex items-center gap-2">Trent's Blog</a>
-
-        <nav class="hidden md:flex items-center gap-8">
-          <a href="index.html#posts" class="text-sm font-medium hover:text-blue-600 transition-colors">Posts</a>
-          <a href="index.html#my-apps" class="text-sm font-medium hover:text-blue-600 transition-colors">My Apps</a>
-          <a href="resume.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Resume</a>
-        </nav>
-
-        <button class="md:hidden p-2 hover:bg-slate-100 rounded-md" onclick="toggleMobileMenu()">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+      <div class="article-tags">
+        <a href="#machine-learning" class="article-tag">Machine Learning</a>
+        <a href="#web-scraping" class="article-tag">Web Scraping / SEO</a>
+        <a href="#google-apis" class="article-tag">Google APIs</a>
+        <a href="#ai-nlp" class="article-tag">AI &amp; NLP</a>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-4 shadow-lg">
-        <a href="index.html#posts" class="block text-sm font-medium" onclick="toggleMobileMenu()">Posts</a>
-        <a href="index.html#my-apps" class="block text-sm font-medium" onclick="toggleMobileMenu()">My Apps</a>
-        <a href="resume.html" class="block text-sm font-medium" onclick="toggleMobileMenu()">Resume</a>
-      </div>
-    </header>
+      <h2>What the app does &amp; why I decided to create it</h2>
+      <p>I wanted to see — just by using a property address, what kind of information I could pull into a web app that would be useful for assessing competitors in the market.</p>
+      <p>Plus, I thought it would be a fun challenge to build a tool that uses Machine Learning, APIs, etc. as I continue to learn about these systems/technologies and various use cases.</p>
+      <p>In short, the app does the following:</p>
 
-    <!-- CONTENT -->
-    <main>
-      <article class="article-card">
-        <div class="meta">Jan 2026</div>
-        <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-4">Creating a simple tool that uses Machine Learning, APIs, AI & More</h1>
+      <ol>
+        <li><strong>1. Retrieves images of the property (street view &amp; aerial)</strong></li>
+        <li><strong>2. Pulls in demographic data (zip code)</strong></li>
+        <li><strong>3. Creates a map with pins of nearby competitors</strong></li>
+        <li><strong>4. Creates a list of competitors with distances, SEO ranking, customer sentiment and more</strong></li>
+      </ol>
 
-        <div class="article-tags">
-          <a href="#machine-learning" class="article-tag">Machine Learning</a>
-          <a href="#web-scraping" class="article-tag">Web Scraping/SEO</a>
-          <a href="#google-apis" class="article-tag">Google APIs</a>
-          <a href="#ai-nlp" class="article-tag">AI & NLP</a>
-        </div>
+      <p><em>So, how does this work?</em></p>
 
-        <div class="content">
+      <h3 id="machine-learning">Machine Learning</h3>
+      <ol>
+        <li>First <strong>TensorFlow/Keras</strong> models were pre-trained with self storage imagery (street view and aerial views for Class A, B, C properties).</li>
+        <li>The python script retrieves the subject property address then processes the photos.</li>
+        <li>The model outputs the Class and displays a % confidence.</li>
+      </ol>
 
-          <h2>What the app does & why I decided to create it</h2>
-          <p>I wanted to see - just by using a property address, what kind of information I could pull into a web app that would be useful for assessing competitors in the market.</p>
-          <p>Plus, I thought it would be a fun challenge to build a tool that uses Machine Learning, APIs, etc. as I continue to learn about these systems/technologies and various use cases.</p>
-          <p>In short, the app does the following:</p>
+      <img src="images/machinelearning1.png" alt="Machine Learning Model Training">
 
-          <ol>
-            <li><strong>1. Retrieves images of the property (street view & aerial)</strong></li>
-            <li><strong>2. Pulls in demographic data (zip code)</strong></li>
-            <li><strong>3. Creates a map with pins of nearby competitors</strong></li>
-            <li><strong>4. Creates a list of competitors with distances, SEO ranking, customer sentiment and more</strong></li>
-          </ol>
+      <p><em>Street view images are hit and miss and often have vehicles/off angles so it's hard to really train the model well on this view. The aerials are much better but still there are some limitations depending on Class B/C properties and the subtle differences from the aerial imagery.</em></p>
 
-          <p><em>So, how does this work?</em></p>
+      <h3 id="web-scraping">Web Scraping / SEO check</h3>
+      <ol>
+        <li>For each competitor URL there is a HTTP GET request made and the script uses <strong>BeautifulSoup</strong> library to check for basic SEO elements.</li>
+        <li>1. Page title</li>
+        <li>2. Meta description</li>
+        <li>3. Mobile viewport tag</li>
+      </ol>
 
-          <h3 id="machine-learning">Machine Learning</h3>
-          <ol>
-            <li>First <strong>TensorFlow/Keras</strong> models were pre-trained with self storage imagery (street view and aerial views for Class A, B, C properties).</li>
-            <li>The python script retrieves the subject property address then processes the photos.</li>
-            <li>The model outputs the Class and displays a % confidence.</li>
-          </ol>
+      <p><em>This can be challenging with REIT websites (Extra Space, Public Storage etc) given the anti-scraping features and dynamically loaded content. So the default if it is a REIT property, there is a high SEO score given.</em></p>
+      <img src="images/machinelearning2.png" alt="Machine Learning Classification">
 
-          <img src="images/machinelearning1.png" alt="Machine Learning Model Training" class="my-6 rounded-lg shadow-md">
+      <h3 id="google-apis">Google APIs (Geocode &amp; Places)</h3>
+      <ol>
+        <li><strong>Geocoding API</strong> converts the subject property address into latitude and longitude coordinates, enabling accurate mapping and spatial analysis.</li>
+        <li><strong>Google Places API</strong> is used to automatically identify nearby self-storage competitors, pull location details, website URLs, and customer reviews.</li>
+      </ol>
 
-          <p><em>Street view images are hit and miss and often have vehicles/off angles so it's hard to really train the model well on this view. The aerials are much better but still there are some limitations depending on Class B/C properties and the subtle differences from the aerial imagery.</em></p>
+      <h3 id="ai-nlp">AI &amp; Natural Language Processing (Customer Sentiment)</h3>
+      <ol>
+        <li>Customer reviews pulled from Google are analyzed using <strong>natural language processing NLP</strong> to estimate overall sentiment.</li>
+        <li>Reviews are scanned for common themes (pricing, cleanliness, staff behavior, access, etc.), and a concise summary of customer perception is generated.</li>
+      </ol>
 
-          <h3 id="web-scraping">Web Scraping/SEO check</h3>
-          <ol>
-            <li>For each competitor URL there is a HTTP GET request made and the script uses <strong>BeautifulSoup</strong> library to check for basic SEO elements.</li>
-            <li>1. Page title</li>
-            <li>2. Meta description</li>
-            <li>3. Mobile viewport tag</li>
-          </ol>
+      <img src="images/machinelearning3.png" alt="Machine Learning Results">
 
-            <p><em>This can be challenging with REIT websites (extra space, public storage etc) given the anti-scraping features and dynamically loaded content. So the default if it is a REIT property, there is a high SEO score given.</em></p>
-            <img src="images/machinelearning2.png" alt="Machine Learning Classification" class="my-6 rounded-lg shadow-md">
-          <h3 id="google-apis">Google APIs (Geocode & Places)</h3>
-          <ol>
-            <li><strong>Geocoding API</strong> converts the subject property address into latitude and longitude coordinates, enabling accurate mapping and spatial analysis.</li>
-            <li><strong>Google Places API</strong> is used to automatically identify nearby self-storage competitors, pull location details, website URLs, and customer reviews.</li>
-          </ol>
+    </div>
 
-          <h3 id="ai-nlp">AI & Natural Language Processing (Customer Sentiment)</h3>
-          <ol>
-            <li>Customer reviews pulled from Google are analyzed using <strong>natural language processing NLP</strong> to estimate overall sentiment.</li>
-            <li>Reviews are scanned for common themes (pricing, cleanliness, staff behavior, access, etc.), and a concise summary of customer perception is generated.</li>
-          </ol>
+    <div class="article-footer">
+      <a href="index.html#blog" class="back-link">← Back to blog</a>
+      <span class="mono" style="font-size:0.75rem;color:var(--mist)">Thanks for reading</span>
+    </div>
+  </div>
+</main>
 
-          <img src="images/machinelearning3.png" alt="Machine Learning Results" class="my-6 rounded-lg shadow-md">
+<footer class="section--dark">
+  <div class="container footer mono">
+    <span>© <span id="current-year"></span></span>
+  </div>
+</footer>
 
-        </div>
-      </article>
-    </main>
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="max-w-3xl mx-auto px-6 py-8 flex justify-between items-center text-sm">
-        <div>© <span id="current-year"></span> Trent's Blog</div>
-      </div>
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script>
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-      lucide.createIcons();
-
-      function toggleMobileMenu(){
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      }
-    </script>
-
-  </body>
+</body>
 </html>
