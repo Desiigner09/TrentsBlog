@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Trent Kloter — Self-Storage Analyst &amp; Investor</title>
 <meta name="description" content="Trent Kloter — self-storage analyst, investor, and builder of data tools for the CRE industry. Based in Tampa, FL." />
+<link rel="canonical" href="https://www.trentkloter.com/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -716,6 +717,33 @@
         grid.querySelectorAll('.post-card').forEach(function (el) {
           el.classList.add('is-visible');
         });
+
+        // Inject VideoObject schema for Google rich results
+        var schema = {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          'itemListElement': data.items.slice(0, 3).map(function (item, i) {
+            var v = new URL(item.link).searchParams.get('v') || '';
+            return {
+              '@type': 'ListItem',
+              'position': i + 1,
+              'item': {
+                '@type': 'VideoObject',
+                'name': decodeHtml(item.title || ''),
+                'description': decodeHtml(item.title || ''),
+                'thumbnailUrl': 'https://img.youtube.com/vi/' + v + '/hqdefault.jpg',
+                'uploadDate': item.pubDate ? new Date(item.pubDate).toISOString() : '',
+                'contentUrl': item.link,
+                'embedUrl': 'https://www.youtube.com/embed/' + v
+              }
+            };
+          })
+        };
+        var s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.textContent = JSON.stringify(schema);
+        document.head.appendChild(s);
+
       } catch (_) {
         var sec = document.getElementById('youtube');
         if (sec) sec.style.display = 'none';
