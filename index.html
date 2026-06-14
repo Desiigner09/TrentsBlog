@@ -174,6 +174,15 @@
     color: var(--signal);
     transform: translateY(-2px);
   }
+  .btn--outline{
+    border-color: var(--paper-dim);
+    color: var(--ink-soft);
+  }
+  .btn--outline:hover{
+    border-color: var(--signal);
+    color: var(--signal);
+    transform: translateY(-2px);
+  }
 
   /* ===== HERO PHOTO ===== */
   .hero__photo{
@@ -274,7 +283,7 @@
     border-radius: 6px;
     overflow: hidden;
     text-decoration: none;
-    color: inherit;
+    color: var(--ink);
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
@@ -350,6 +359,22 @@
   }
   .post-card:hover .post-card__link{ gap: 0.7rem; }
 
+  .post-card__watch-btn{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    background: var(--signal);
+    color: var(--ink);
+    padding: 0.55rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    align-self: flex-start;
+    transition: transform 0.15s ease;
+  }
+  .post-card:hover .post-card__watch-btn{ transform: translateY(-2px); }
+
   @media (max-width: 860px){
     .posts__grid{ grid-template-columns: 1fr 1fr; }
     .posts__grid--bottom{ grid-template-columns: 1fr 1fr; }
@@ -357,6 +382,34 @@
   @media (max-width: 540px){
     .posts__grid{ grid-template-columns: 1fr; }
     .posts__grid--bottom{ grid-template-columns: 1fr; }
+  }
+
+  /* ===== YOUTUBE ===== */
+  .yt-thumb-wrap{
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+  .yt-play-btn{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: rgba(232,115,46,0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    padding-left: 4px;
+  }
+  .post-card:hover .yt-play-btn{ opacity: 1; }
+  .yt-channel-link{
+    margin-top: 2rem;
   }
 
   /* ===== CONTACT ===== */
@@ -415,6 +468,7 @@
     <nav class="nav__links">
       <a href="#work">What I Do</a>
       <a href="#blog">Blog</a>
+      <a href="#youtube">YouTube</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -433,7 +487,7 @@
     </div>
 
     <div>
-      <img class="hero__photo" src="images/tkpic.jpeg" alt="Trent Kloter">
+      <img class="hero__photo" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/tkpic.jpeg" alt="Trent Kloter">
       <ul class="legend">
         <li><span class="legend__num mono">01</span> Market Research</li>
         <li><span class="legend__num mono">02</span> Underwriting</li>
@@ -476,6 +530,22 @@
   </div>
 </section>
 
+<!-- YOUTUBE -->
+<section class="section posts section--dark grid-tex" id="youtube">
+  <div class="container">
+    <div class="reveal">
+      <p class="eyebrow">On YouTube</p>
+      <h2>Latest videos</h2>
+    </div>
+    <div class="posts__grid reveal" id="yt-grid">
+      <!-- populated by JS from YouTube RSS feed -->
+    </div>
+    <div class="yt-channel-link reveal">
+      <a class="btn btn--ghost" href="https://www.youtube.com/@AICREAnalyst" target="_blank" rel="noopener">View all videos &#8594;</a>
+    </div>
+  </div>
+</section>
+
 <!-- BLOG -->
 <section class="section posts grid-tex" id="blog">
   <div class="container">
@@ -487,7 +557,7 @@
     <div class="posts__grid reveal">
 
       <a href="brazil-self-storage.html" class="post-card">
-        <img class="post-card__img" src="images/brazil1.jpg" alt="Exploring Self Storage In Brazil">
+        <img class="post-card__img" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/brazil1.jpg" alt="Exploring Self Storage In Brazil">
         <div class="post-card__body">
           <div class="post-card__meta">
             <span>Mar 2026</span>
@@ -500,7 +570,7 @@
       </a>
 
       <a href="ml-tool-article.html" class="post-card">
-        <img class="post-card__img" src="images/machinelearning1.png" alt="ML Tool">
+        <img class="post-card__img" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/machinelearning1.png" alt="ML Tool">
         <div class="post-card__body">
           <div class="post-card__meta">
             <span>Jan 2026</span>
@@ -513,7 +583,7 @@
       </a>
 
       <a href="travel2025.html" class="post-card">
-        <img class="post-card__img" src="images/Travel1.jpg" alt="2025 Travel Recap">
+        <img class="post-card__img" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/Travel1.jpg" alt="2025 Travel Recap">
         <div class="post-card__body">
           <div class="post-card__meta">
             <span>Dec 2025</span>
@@ -530,7 +600,7 @@
     <div class="posts__grid reveal" style="margin-top:1.5rem">
 
       <a href="mystoragestory.html" class="post-card">
-        <img class="post-card__img" src="images/mystorage.jpg" alt="Self Storage in Vietnam">
+        <img class="post-card__img" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/mystorage.jpg" alt="Self Storage in Vietnam">
         <div class="post-card__body">
           <div class="post-card__meta">
             <span>Dec 2025</span>
@@ -543,7 +613,7 @@
       </a>
 
       <a href="whatilearnedarticle.html" class="post-card">
-        <img class="post-card__img" src="images/storagemap.png" alt="Storage Map Pro">
+        <img class="post-card__img" src="https://raw.githubusercontent.com/Desiigner09/TrentsBlog/main/images/storagemap.png" alt="Storage Map Pro">
         <div class="post-card__body">
           <div class="post-card__meta">
             <span>Dec 2025</span>
@@ -582,8 +652,9 @@
   document.getElementById('current-year').textContent = new Date().getFullYear();
 
   const revealEls = document.querySelectorAll('.reveal');
+  let obs;
   if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver((entries) => {
+    obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
@@ -595,6 +666,64 @@
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
+
+  // YouTube latest videos — fetches via rss2json (returns clean JSON, no XML namespace issues)
+  (function () {
+    const CHANNEL_ID = 'UCCt6P3aWmXXKX2qZAMYscRQ';
+    const API = 'https://api.rss2json.com/v1/api.json?rss_url=' +
+      encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID);
+
+    function esc(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function decodeHtml(str) {
+      const el = document.createElement('textarea');
+      el.innerHTML = str;
+      return el.value;
+    }
+
+    async function loadVideos() {
+      const grid = document.getElementById('yt-grid');
+      if (!grid) return;
+      try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error();
+
+        grid.innerHTML = data.items.slice(0, 3).map(function (item) {
+          const vid = new URL(item.link).searchParams.get('v') || '';
+          const title = decodeHtml(item.title || '');
+          const dateStr = item.pubDate
+            ? new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+            : '';
+          const thumb = 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
+          return [
+            '<a href="' + esc(item.link) + '" target="_blank" rel="noopener" class="post-card">',
+            '  <div class="yt-thumb-wrap">',
+            '    <img class="post-card__img" src="' + thumb + '" alt="' + esc(title) + '" loading="lazy">',
+            '    <div class="yt-play-btn" aria-hidden="true">&#9654;</div>',
+            '  </div>',
+            '  <div class="post-card__body">',
+            '    <div class="post-card__meta"><span>' + dateStr + '</span></div>',
+            '    <h3>' + esc(title) + '</h3>',
+            '    <span class="post-card__watch-btn">Watch video &#8594;</span>',
+            '  </div>',
+            '</a>'
+          ].join('\n');
+        }).join('\n');
+
+        grid.querySelectorAll('.post-card').forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+      } catch (_) {
+        var sec = document.getElementById('youtube');
+        if (sec) sec.style.display = 'none';
+      }
+    }
+
+    loadVideos();
+  })();
 </script>
 
 </body>
